@@ -16,8 +16,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   int totalCount = 0;
-  double totalCaloriesBurned = 0;
-  double totalDistanceCovered = 0;
+
   List<HealthDataPoint> healthData = [];
 
   final _localNotificationService = LocalNotificationService();
@@ -34,8 +33,6 @@ class _HomeViewState extends State<HomeView> {
   void dispose() {
     super.dispose();
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -77,12 +74,12 @@ class _HomeViewState extends State<HomeView> {
                 SizedBox(height: 20.0),
                 ListTile(
                   leading: Icon(Icons.local_fire_department, color: Colors.orange),
-                  title: Text('Total Calories Burned: $totalCaloriesBurned '),
+                  title: Text('Total Calories Burned: ${controller.totalCaloriesBurned.value.toStringAsFixed(2)} '),
                 ),
                 ListTile(
                   leading: Icon(Icons.directions_walk, color: Colors.green),
                   title:
-                      Text('Total Distance Covered: $totalDistanceCovered meters'),
+                      Text('Total Distance Covered: ${controller.totalDistanceCovered.value.toStringAsFixed(2)} KM'),
                 ),
                 ElevatedButton(onPressed: (){
                    FlutterBackgroundService().startService();

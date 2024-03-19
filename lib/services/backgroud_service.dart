@@ -25,7 +25,7 @@ void onStart(ServiceInstance service){
    service.stopSelf();
   });
   
-  Timer.periodic(Duration(seconds: 1), (Timer t) => controller.getTrackingData());
+  Timer.periodic(Duration(seconds: 3), (Timer t) => controller.getTrackingData());
 }
 
 
