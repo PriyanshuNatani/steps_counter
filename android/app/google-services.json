@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "611557000894",
+    "project_id": "stepscounter-b7113",
+    "storage_bucket": "stepscounter-b7113.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:611557000894:android:65eff031192033ccc9c0ef",
+        "android_client_info": {
+          "package_name": "com.priyanshu.steps_counter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "611557000894-kvkurlte1pbaittjrdomhq5jpeplt509.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.priyanshu.steps_counter",
+            "certificate_hash": "3d9912dfb5568c150a9290ef8640a5a34c416878"
+          }
+        },
+        {
+          "client_id": "611557000894-jnn1vu4bc5gc3me4bi3s9inbjm9enmat.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpXF_-1pnvRUvw3BHNzpsaJkZ8C-in8co"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "611557000894-jnn1vu4bc5gc3me4bi3s9inbjm9enmat.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
