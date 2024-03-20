@@ -38,10 +38,8 @@ dependencies:
   health: ^9.0.1
   permission_handler: ^11.0.1
   flutter_local_notifications: ^17.0.0
-  flutter_background: any
-  flutter_background_service: ^5.0.5
-  pedometer: ^4.0.1
-  workmanager: ^0.5.1
+  flutter_background_service: any
+  flutter_background_service_android: "6.0.1"
   get: ^4.6.5
 
 dev_dependencies:

@@ -10,14 +10,14 @@ class HomeController extends GetxController {
     var totalCaloriesBurned = 0.0.obs;
   var totalDistanceCovered = 0.0.obs
 ;  
-  void getTrackingData() async {
-    googleFitDataType.value = await _googleFitService.getData();
+  void getTrackingData({int? count}) async {
+    googleFitDataType.value = await _googleFitService.getData(count:count);
      var calVal = 0.0;
      var disVal = 0.0;
 
     for(int i = 0; i< (googleFitDataType.value?.healthData?.length??0);i++){
-      print("<----------------->");
-      print(googleFitDataType.value?.healthData?[i].value.toString());
+    
+    
       if(googleFitDataType.value?.healthData?[i].type.toString().toUpperCase() == "HEALTHDATATYPE.ACTIVE_ENERGY_BURNED"){
         calVal += double.parse(googleFitDataType.value?.healthData?[i].value.toString()??"0.0");
     }

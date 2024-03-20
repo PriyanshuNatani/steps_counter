@@ -1,11 +1,15 @@
+
+
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:get/get.dart';
 import 'package:health/health.dart';
 import 'package:steps_counter/screens/home_controller.dart';
-import 'package:steps_counter/services/google_fit_service.dart';
+
 import 'package:steps_counter/services/local_notfication_service.dart';
-import 'package:workmanager/workmanager.dart';
+
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -21,12 +25,15 @@ class _HomeViewState extends State<HomeView> {
 
   final _localNotificationService = LocalNotificationService();
 
- var controller = Get.put(HomeController());
+  var controller = Get.put(HomeController());
+
   @override
   void initState() {
     super.initState();
     _localNotificationService.initializeNotifications();
-    controller.getTrackingData();
+    Timer.periodic(Duration(seconds: 2), (Timer t) {
+      controller.getTrackingData();
+    });
   }
 
   @override
@@ -39,7 +46,7 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       appBar: AppBar(title: Text('Fit Life')),
       body: Obx(
-       ()=> SingleChildScrollView(
+        () => SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -61,7 +68,7 @@ class _HomeViewState extends State<HomeView> {
                       ),
                       SizedBox(height: 10.0),
                       Text(
-                        '${controller.googleFitDataType.value?.stepsCount??""}',
+                        '${controller.googleFitDataType.value?.stepsCount ?? ""}',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 36.0,
@@ -73,33 +80,43 @@ class _HomeViewState extends State<HomeView> {
                 ),
                 SizedBox(height: 20.0),
                 ListTile(
-                  leading: Icon(Icons.local_fire_department, color: Colors.orange),
-                  title: Text('Total Calories Burned: ${controller.totalCaloriesBurned.value.toStringAsFixed(2)} '),
+                  leading:
+                      Icon(Icons.local_fire_department, color: Colors.orange),
+                  title: Text(
+                      'Total Calories Burned: ${controller.totalCaloriesBurned.value.toStringAsFixed(2)} '),
                 ),
                 ListTile(
                   leading: Icon(Icons.directions_walk, color: Colors.green),
-                  title:
-                      Text('Total Distance Covered: ${controller.totalDistanceCovered.value.toStringAsFixed(2)} KM'),
+                  title: Text(
+                      'Total Distance Covered: ${controller.totalDistanceCovered.value.toStringAsFixed(2)} KM'),
                 ),
-                ElevatedButton(onPressed: (){
-                   FlutterBackgroundService().startService();
-                }, child: Text("Start service")),
+                ElevatedButton(
+                    onPressed: ()async {
+                    await FlutterBackgroundService().startService();
+                    FlutterBackgroundService().invoke('setAsBackground');
+                      
+                    },
+                    child: Text("Start service")),
                 SizedBox(height: 10.0),
-                     ElevatedButton(onPressed: (){
-                   FlutterBackgroundService().invoke('stopService');
-                }, child: Text("Stop service")),
-                    SizedBox(height: 20.0),
+                ElevatedButton(
+                    onPressed: () {
+                      FlutterBackgroundService().invoke('stopService');
+                    },
+                    child: Text("Stop service")),
+                SizedBox(height: 20.0),
                 Text('Health Data:'),
                 SizedBox(height: 10.0),
-                Text((controller.googleFitDataType.value?.healthData??"").toString()),
+                Text((controller.googleFitDataType.value?.healthData ?? "")
+                    .toString()),
               ],
             ),
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: ()  {
-        controller.getTrackingData();
+        onPressed: () {
+           FlutterBackgroundService().invoke('setAsForeground');
+         // controller.getTrackingData();
         },
         child: Icon(Icons.refresh),
       ),
