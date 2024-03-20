@@ -28,7 +28,7 @@ void onStart(ServiceInstance service) {
   service.on('setAsBackground').listen((event) {
     print("working -- > setAsBackground");
     Timer.periodic(
-        Duration(seconds: 2), (Timer t) => controller.getTrackingData());
+        Duration(seconds: 2), (Timer t) => controller.getTrackingData(isBackground:true));
   });
 
   service.on("stopService").listen((event) {
@@ -50,10 +50,11 @@ Future<void> backgroudServiseInit() async {
       iosConfiguration: IosConfiguration(
           // onBackground: iosBackground,
           onForeground: onStart),
-      androidConfiguration: AndroidConfiguration(
+          androidConfiguration: AndroidConfiguration(
           onStart: onStart,
           autoStart: false,
           isForegroundMode: true,
+          autoStartOnBoot: true,
           notificationChannelId: "FIT",
           initialNotificationTitle: "FIT",
           initialNotificationContent: "Fit is working on background",

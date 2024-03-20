@@ -32,7 +32,11 @@ class GoogleFitService {
     }
   }
 
-  Future<GoogleFitDataType> getData({int? count}) async {
+  Future<GoogleFitDataType> getData({int? count, bool? isBackground}) async {
+    if(isBackground??false){
+     //  await _localNotificationService.showNotification("100");
+    }
+    
     var now = DateTime.now();
 
     healthData = await health.getHealthDataFromTypes(

@@ -10,8 +10,8 @@ class HomeController extends GetxController {
     var totalCaloriesBurned = 0.0.obs;
   var totalDistanceCovered = 0.0.obs
 ;  
-  void getTrackingData({int? count}) async {
-    googleFitDataType.value = await _googleFitService.getData(count:count);
+  void getTrackingData({int? count, bool? isBackground}) async {
+    googleFitDataType.value = await _googleFitService.getData(count:count,isBackground: isBackground);
      var calVal = 0.0;
      var disVal = 0.0;
 
